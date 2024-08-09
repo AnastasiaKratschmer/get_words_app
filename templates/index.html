@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 300px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Vaase- Word Generator</h1>
+    <p>
+        This tool generates possible words using the letters you provide. 
+        Enter a string of letters ("a word") and specify a required letter (must be contained in your previously provided letters). The tool will find words between 4 to 7 letters long that include the required letter. It only finds words in Danish.
+    </p>
+    <p>
+        Please ensure your input is in lowercase and has no spaces!!
+    </p>
+    <form method="post">
+        <label for="input_word">Input Word:</label>
+        <input type="text" id="input_word" name="input_word" required>
+        
+        <label for="required_letter">Required Letter:</label>
+        <input type="text" id="required_letter" name="required_letter" required>
+        
+        <input type="submit" value="Generate Words">
+    </form>
+    
+    {% if valid_words %}
+    <div class="results">
+        <h2>We found {{ count }} possibly valid words:</h2>
+        <ul>
+            {% for word in valid_words %}
+            <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>
